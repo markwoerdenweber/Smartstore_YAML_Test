@@ -32,7 +32,7 @@ jobs:
 
     steps:
     - name: Dump used Branch
-      run: echo "${{ github.GITHUB_REF_NAME }}"
+      run: echo "$GITHUB_REF_NAME"
 
 #    - name: Checkout repository
 #      uses: actions/checkout@v3
