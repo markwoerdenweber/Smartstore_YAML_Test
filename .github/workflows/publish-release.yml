@@ -9,6 +9,7 @@ on:
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  CURRENT_BRANCH: $GITHUB_REF_NAME
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,7 +34,7 @@ jobs:
     - name: Dump used Branch
       run: |
         echo "Running from main branch:"
-        echo "$GITHUB_REF_NAME"
+        echo "$CURRENT_BRANCH"
 
 #    - name: Checkout repository
 #      uses: actions/checkout@v3
