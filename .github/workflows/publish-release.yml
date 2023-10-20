@@ -3,7 +3,7 @@ name: Publish release Docker image on Push
 on:
   push:
     branches:
-      - '5.0.5.x' # << Change this for new versions!
+      - '5.0.5.x' # << Change this for new versions.
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -46,7 +46,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x # << Change this to current .NET version!
+        dotnet-version: 7.0.x # << Change this to current .NET version.
         include-prerelease: false
 
     - name: Build
