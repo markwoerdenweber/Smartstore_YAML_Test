@@ -30,10 +30,15 @@ jobs:
       id-token: write
 
     steps:
-    - name: Dump used Branch
+    - name: Dump used Branch for Linux
+      if: matrix.os == 'ubuntu-latest'
       run: |
-        echo "Running from 5.0.5.x branch:"
+        echo "Running on branch:"
         echo "$GITHUB_REF_NAME"
+    - name: Dump used Branch for Windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        echo "Running on branch:"
         echo "$env:GITHUB_REF_NAME"
 
 #    - name: Checkout repository
