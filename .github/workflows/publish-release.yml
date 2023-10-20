@@ -1,25 +1,21 @@
-name: Publish release Docker image
-
-on:
-  push:
-    branches:
-      - '5.0.5.x' # << Change this for new versions!
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version, e.g. 5.0.5'
-        required: true
+name: Publish release Docker image on Push
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  BRANCH_TO_USE: '5.0.5.x' # << Change this for new versions!
+
+on:
+  push:
+    branches:
+      - BRANCH_TO_USE
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-
   publish-release:
     name: Build, Publish and Deploy stable release Docker image
     runs-on: ${{ matrix.os }}
@@ -54,18 +50,18 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Publish and Push for Linux
-      if: matrix.os == 'ubuntu-latest'
-      run: | 
-        dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
-        docker build --build-arg SOURCE=./.build/release -f NoBuild.Dockerfile -t ghcr.io/smartstore/smartstore-linux:latest -t ghcr.io/smartstore/smartstore-linux:${{ github.event.inputs.version }} .
-        docker push ghcr.io/smartstore/smartstore-linux:latest
-        docker push ghcr.io/smartstore/smartstore-linux:${{ github.event.inputs.version }}
+#    - name: Publish and Push for Linux
+#      if: matrix.os == 'ubuntu-latest'
+#      run: | 
+#        dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
+#        docker build --build-arg SOURCE=./.build/release -f NoBuild.Dockerfile -t ghcr.io/smartstore/smartstore-linux:latest -t ghcr.io/smartstore/smartstore-linux:$BRANCH_TO_USE .
+#        docker push ghcr.io/smartstore/smartstore-linux:latest
+#        docker push ghcr.io/smartstore/smartstore-linux:$BRANCH_TO_USE
 
-    - name: Publish and Push for Windows
-      if: matrix.os == 'windows-latest'
-      run: | 
-        dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
-        docker build --build-arg SOURCE=./.build/release -f Nano.Dockerfile -t ghcr.io/smartstore/smartstore-windows:latest -t ghcr.io/smartstore/smartstore-windows:${{ github.event.inputs.version }} .
-        docker push ghcr.io/smartstore/smartstore-windows:latest
-        docker push ghcr.io/smartstore/smartstore-windows:${{ github.event.inputs.version }}
+#    - name: Publish and Push for Windows
+#      if: matrix.os == 'windows-latest'
+#      run: | 
+#        dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
+#        docker build --build-arg SOURCE=./.build/release -f Nano.Dockerfile -t ghcr.io/smartstore/smartstore-windows:latest -t ghcr.io/smartstore/smartstore-windows:$BRANCH_TO_USE .
+#        docker push ghcr.io/smartstore/smartstore-windows:latest
+#        docker push ghcr.io/smartstore/smartstore-windows:$BRANCH_TO_USE
