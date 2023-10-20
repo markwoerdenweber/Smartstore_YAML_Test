@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - '5.0.5.x' # << Change this for new versions!
-      - main
   workflow_dispatch:
 
 env:
