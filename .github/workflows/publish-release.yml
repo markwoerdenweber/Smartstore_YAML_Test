@@ -63,14 +63,14 @@ jobs:
 #      if: matrix.os == 'ubuntu-latest'
 #      run: | 
 #        dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
-#        docker build --build-arg SOURCE=./.build/release -f NoBuild.Dockerfile -t ghcr.io/smartstore/smartstore-linux:latest -t ghcr.io/smartstore/smartstore-linux:${{ github.GITHUB_REF_NAME }} .
+#        docker build --build-arg SOURCE=./.build/release -f NoBuild.Dockerfile -t ghcr.io/smartstore/smartstore-linux:latest -t ghcr.io/smartstore/smartstore-linux:$GITHUB_REF_NAME .
 #        docker push ghcr.io/smartstore/smartstore-linux:latest
-#        docker push ghcr.io/smartstore/smartstore-linux:${{ github.GITHUB_REF_NAME }}
+#        docker push ghcr.io/smartstore/smartstore-linux:$GITHUB_REF_NAME
 
 #    - name: Publish and Push for Windows
 #      if: matrix.os == 'windows-latest'
 #      run: | 
 #        dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
-#        docker build --build-arg SOURCE=./.build/release -f Nano.Dockerfile -t ghcr.io/smartstore/smartstore-windows:latest -t ghcr.io/smartstore/smartstore-windows:${{ github.GITHUB_REF_NAME }} .
+#        docker build --build-arg SOURCE=./.build/release -f Nano.Dockerfile -t ghcr.io/smartstore/smartstore-windows:latest -t ghcr.io/smartstore/smartstore-windows:$env:GITHUB_REF_NAME .
 #        docker push ghcr.io/smartstore/smartstore-windows:latest
-#        docker push ghcr.io/smartstore/smartstore-windows:${{ github.GITHUB_REF_NAME }}
+#        docker push ghcr.io/smartstore/smartstore-windows:$env:GITHUB_REF_NAME
