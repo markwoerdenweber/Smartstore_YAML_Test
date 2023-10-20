@@ -34,21 +34,24 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x # << Change this to current .NET version!
-        include-prerelease: false
+    - name: Dump used Branch
+      run: echo "$GITHUB_REF_NAME"
 
-    - name: Build
-      run: dotnet build Smartstore.sln -c Release
+#    - name: Setup .NET
+#      uses: actions/setup-dotnet@v3
+#      with:
+#        dotnet-version: 7.0.x # << Change this to current .NET version!
+#        include-prerelease: false
 
-    - name: Log in to the GitHub Container registry
-      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Build
+#      run: dotnet build Smartstore.sln -c Release
+
+#    - name: Log in to the GitHub Container registry
+#      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+#      with:
+#        registry: ghcr.io
+#        username: ${{ github.actor }}
+#        password: ${{ secrets.GITHUB_TOKEN }}
 
 #    - name: Publish and Push for Linux
 #      if: matrix.os == 'ubuntu-latest'
