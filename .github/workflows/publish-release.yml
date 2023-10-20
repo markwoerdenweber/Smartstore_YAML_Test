@@ -31,7 +31,9 @@ jobs:
 
     steps:
     - name: Dump used Branch
-      run: echo "$GITHUB_REF_NAME"
+      run: |
+        echo "Running from main branch:"
+        echo "$GITHUB_REF_NAME"
 
 #    - name: Checkout repository
 #      uses: actions/checkout@v3
