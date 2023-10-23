@@ -1,5 +1,5 @@
 name: Publish release Docker image on Push
-
+# Adding a minor change
 on:
   push:
     branches:
