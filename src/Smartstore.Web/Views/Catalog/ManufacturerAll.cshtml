@@ -9,6 +9,7 @@
     var alphabeticalList = Model.Except(numericList).Where(x => x.Name.HasValue()).OrderBy(x => x.Name).ToArray();
     var sortManufacturersAlphabetically = (bool)ViewBag.SortManufacturersAlphabetically;
 
+    /* The newest comment */
     async Task RenderManufacturer(BrandModel item)
     {
         var url = Url.RouteUrl("Manufacturer", new { SeName = item.SeName });
