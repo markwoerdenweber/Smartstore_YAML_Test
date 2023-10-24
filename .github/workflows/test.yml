@@ -1,0 +1,41 @@
+name: Scripting test combining branch name and input
+
+on:
+  push:
+    branches:
+      - '5.0.x' # << Change this for new versions.
+  workflow_dispatch:
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish-release:
+    name: Build, Publish and Deploy stable release Docker image
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Format branch label
+      id: format-branch-label
+      run: bash .github/script.sh
+
+    - name: Show output
+      run: echo ${{ steps.format-branch-label.outputs.branch-label }}
