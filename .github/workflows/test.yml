@@ -38,4 +38,4 @@ jobs:
       run: bash .github/script.sh
 
     - name: Show output
-      run: echo ${{ steps.name.outputs }}
+      run: echo ${{ steps.format-branch-label.outputs }}
