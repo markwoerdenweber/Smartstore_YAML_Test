@@ -20,7 +20,7 @@ namespace Smartstore.Caching
     [JsonConverter(typeof(ObjectContainerJsonConverter))]
     public class CacheEntry : IObjectContainer, ICloneable<CacheEntry>
     {
-        // Used for serialization compatibility
+        // Used for serialization compatibility.
         [IgnoreDataMember]
         public static readonly string Version = "1";
 
