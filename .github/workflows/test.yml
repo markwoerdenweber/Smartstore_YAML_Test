@@ -30,6 +30,9 @@ jobs:
       id-token: write
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
     - name: Format Branch / Version
       run: |
         echo Linux: $GITHUB_REF_NAME
@@ -37,6 +40,6 @@ jobs:
         echo Manual: ${{ github.event.inputs.version }}
 
     - name: Test-Script
-      run: pwd
+      run: |
         # chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
-        # bash ${GITHUB_WORKSPACE}/.github/script.sh
+        bash .github/script.sh
