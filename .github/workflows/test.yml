@@ -3,7 +3,7 @@ name: Scripting test combining branch name and input
 on:
   push:
     branches:
-      - '5.0.5.x' # << Change this for new versions.
+      - 'main' # << Change this for new versions.
   workflow_dispatch:
     inputs:
       version:
@@ -36,5 +36,6 @@ jobs:
     steps:
     - name: Format Branch / Version
       run: |
-        echo $GITHUB_REF_NAME
-        echo $env:GITHUB_REF_NAME
+        echo Linux: $GITHUB_REF_NAME
+        echo Windows: $env:GITHUB_REF_NAME
+        echo Manual: ${{ github.event.inputs.version }}
