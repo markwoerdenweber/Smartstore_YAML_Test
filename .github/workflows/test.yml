@@ -3,7 +3,7 @@ name: Scripting test combining branch name and input
 on:
   push:
     branches:
-      - '5.0.1' # << Change this for new versions.
+      - '5.0.1.x' # << Change this for new versions.
   workflow_dispatch:
 
 env:
@@ -30,8 +30,12 @@ jobs:
       id-token: write
 
     steps:
-    - name: Format Branch / Version
-      run: |
-        echo Linux: $GITHUB_REF_NAME
-        echo Windows: $env:GITHUB_REF_NAME
-        echo Manual: ${{ github.event.inputs.version }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Format branch label
+      id: format-branch-label
+      run: bash .github/script.sh
+
+    - name: Show output
+      run: echo ${{ steps.format-branch-label.outputs.branch-label }}
