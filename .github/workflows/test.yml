@@ -40,5 +40,4 @@ jobs:
 #        echo Manual: ${{ github.event.inputs.version }}
 
     - name: Test-Script
-      #run: bash .github/script.sh
-      run: echo "{name}=${$GITHUB_REF_NAME:-$env:GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+      run: bash .github/script.sh
