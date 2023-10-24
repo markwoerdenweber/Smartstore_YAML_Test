@@ -1,3 +1,4 @@
-USED_BRANCH=$GITHUB_REF_NAME
-echo "branch-label=${USED_BRANCH:-$env:GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-echo ${USED_BRANCH:-$env:GITHUB_REF_NAME}
+str=${$GITHUB_REF_NAME:-$env:GITHUB_REF_NAME}
+find=".x"
+replace=""
+echo "branch-label=${str//$find/$replace}" >> $GITHUB_OUTPUT
