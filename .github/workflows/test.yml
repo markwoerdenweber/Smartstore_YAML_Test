@@ -37,6 +37,5 @@ jobs:
         echo Manual: ${{ github.event.inputs.version }}
 
     - name: Test-Script
-      run: |
-        # chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
-        bash .github/script.sh
+      run: bash "${GITHUB_WORKSPACE}/.github/script.sh"
+      # chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
