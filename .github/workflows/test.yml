@@ -35,3 +35,4 @@ jobs:
         echo Linux: $GITHUB_REF_NAME
         echo Windows: $env:GITHUB_REF_NAME
         echo Manual: ${{ github.event.inputs.version }}
+        -e {/script.sh}
