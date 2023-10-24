@@ -32,12 +32,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      
-#    - name: Format Branch / Version
-#      run: |
-#        echo Linux: $GITHUB_REF_NAME
-#        echo Windows: $env:GITHUB_REF_NAME
-#        echo Manual: ${{ github.event.inputs.version }}
 
-    - name: Test-Script
+    - name: Format branch label
+      id: format-branch-label
       run: bash .github/script.sh
+
+    - name: Show output
+      run: echo ${{ steps.name.outputs }}
