@@ -3,12 +3,8 @@ name: Scripting test combining branch name and input
 on:
   push:
     branches:
-      - 'main' # << Change this for new versions.
+      - '5.0.1' # << Change this for new versions.
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version, eg. 5.0.5'
-        required: true
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
