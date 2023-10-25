@@ -35,7 +35,7 @@ jobs:
 
     - name: Format branch label
       id: format-branch-label
-      run: bash .github/script.sh
+      run: bash .github/FormatBranchLabel.sh
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
