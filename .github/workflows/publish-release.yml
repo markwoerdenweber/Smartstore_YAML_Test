@@ -1,9 +1,10 @@
-name: Publish release Docker image on Push
+name: Publish release Docker image
 
 on:
   push:
     branches:
-      - '5.0.7.x' # << Change this for new versions.
+      - '5.0.6.x' # << Change this for new versions.
+  workflow_dispatch:
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -29,19 +30,12 @@ jobs:
       id-token: write
 
     steps:
-    - name: Dump used Branch for Linux
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        echo Running on branch:
-        echo $GITHUB_REF_NAME
-    - name: Dump used Branch for Windows
-      if: matrix.os == 'windows-latest'
-      run: |
-        echo Running on branch:
-        echo $env:GITHUB_REF_NAME
-
     - name: Checkout repository
       uses: actions/checkout@v3
+
+    - name: Format branch label
+      id: format-branch-label
+      run: bash .github/FormatBranchLabel.sh
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -63,14 +57,14 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: | 
         dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
-        docker build --build-arg SOURCE=./.build/release -f NoBuild.Dockerfile -t ghcr.io/markwoerdenweber/smartstore-linux:latest -t ghcr.io/markwoerdenweber/smartstore-linux:$GITHUB_REF_NAME .
+        docker build --build-arg SOURCE=./.build/release -f NoBuild.Dockerfile -t ghcr.io/markwoerdenweber/smartstore-linux:latest -t ghcr.io/markwoerdenweber/smartstore-linux:${{ steps.format-branch-label.outputs.branch-label }} .
         docker push ghcr.io/markwoerdenweber/smartstore-linux:latest
-        docker push ghcr.io/markwoerdenweber/smartstore-linux:$GITHUB_REF_NAME
+        docker push ghcr.io/markwoerdenweber/smartstore-linux:${{ steps.format-branch-label.outputs.branch-label }}
 
     - name: Publish and Push for Windows
       if: matrix.os == 'windows-latest'
       run: | 
         dotnet publish src/Smartstore.Web/Smartstore.Web.csproj -c Release -o ./.build/release --no-restore --no-build --no-self-contained
-        docker build --build-arg SOURCE=./.build/release -f Nano.Dockerfile -t ghcr.io/markwoerdenweber/smartstore-windows:latest -t ghcr.io/markwoerdenweber/smartstore-windows:$env:GITHUB_REF_NAME .
+        docker build --build-arg SOURCE=./.build/release -f Nano.Dockerfile -t ghcr.io/markwoerdenweber/smartstore-windows:latest -t ghcr.io/markwoerdenweber/smartstore-windows:${{ steps.format-branch-label.outputs.branch-label }} .
         docker push ghcr.io/markwoerdenweber/smartstore-windows:latest
-        docker push ghcr.io/markwoerdenweber/smartstore-windows:$env:GITHUB_REF_NAME
+        docker push ghcr.io/markwoerdenweber/smartstore-windows:${{ steps.format-branch-label.outputs.branch-label }}
