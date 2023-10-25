@@ -5,6 +5,7 @@ gitGraph
     branch develop
     checkout develop
     commit
+    branch 5.0.5.x
     commit
     checkout main
     merge develop
@@ -14,8 +15,8 @@ gitGraph
 
 ```mermaid
 graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+    [Hotfix branch]-->[NuGet packages];
+    [NuGet packages]-->[Release];
+    [Release]-->[Changelog];
+    [Hotfix branch]-->[Changelog];
 ```
