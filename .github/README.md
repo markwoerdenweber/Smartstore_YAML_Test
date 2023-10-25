@@ -15,8 +15,8 @@ gitGraph
 
 ```mermaid
 graph TD;
-    [Hotfix branch]-->[NuGet packages];
-    [NuGet packages]-->[Release];
-    [Release]-->[Changelog];
-    [Hotfix branch]-->[Changelog];
+    Hotfix branch-->NuGet packages;
+    NuGet packages-->Release;
+    Release-->Changelog;
+    Hotfix branch-->Changelog;
 ```
