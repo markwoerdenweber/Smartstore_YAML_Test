@@ -9,7 +9,6 @@ gitGraph
   commit id: "Bug fix"
   checkout main
   commit id: "Feature 3"
-  checkout main
   commit id: "v3.3" tag: "Smartstore v3.3" type:HIGHLIGHT
   commit id: "Finalized v3.3"
   branch "Hotfix 3.3"
