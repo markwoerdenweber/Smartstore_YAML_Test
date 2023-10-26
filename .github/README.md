@@ -38,14 +38,14 @@ Please decorate your code with useful comments where appropriate. Consider the f
 ```c#
 public string C_Dec(int r = 123)
 {
-	return $"abc={r}";
+    return $"abc={r}";
 }
 ```
 
 ```c#
 public string CreateDeclaration(int customerId = 123)
 {
-	return $"abc={customerId}";
+    return $"abc={customerId}";
 }
 ```
 
@@ -56,8 +56,8 @@ public string CreateDeclaration(int customerId = 123)
 /// </summary>
 public string CreateABCDeclaration(int customerId = 123)
 {
-	// Prepare and return the new declaration for 'abc'.
-	return $"abc={customerId}";
+    // Prepare and return the new declaration for 'abc'.
+    return $"abc={customerId}";
 }
 ```
 
