@@ -33,37 +33,9 @@ By doing this, we can quickly access the source code of the module for a specifi
 
 > With great code comes great documentability. :spider:
 
-Please decorate your code with useful comments where appropriate. Consider the following:
+Please decorate your code and repository `README`'s with useful comments and documentation.
 
-```c#
-public string C_Dec(int r = 123)
-{
-    return $"abc={r}";
-}
-```
-
-```c#
-public string CreateDeclaration(int customerId = 123)
-{
-    return $"abc={customerId}";
-}
-```
-
-```c#
-/// <summary>
-/// Creates a new declaration defining the owner.
-/// <param name="customerId">The owner of this declaration.</param>
-/// </summary>
-public string CreateABCDeclaration(int customerId = 123)
-{
-    // Prepare and return the new declaration for 'abc'.
-    return $"abc={customerId}";
-}
-```
-
-If in doubt, add [documentation](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments).
-
-## Test-Data
+### Test-Data
 
 If any generic data was used to test your module, such as phone numbers, bank details, or login credentials, please include it either in your documentation, the readme file, or in an extra file that is linked to.
 This is especially important for payment and import/export modules.
