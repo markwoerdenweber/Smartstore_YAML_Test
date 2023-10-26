@@ -6,10 +6,9 @@ gitGraph
   commit id: "Finalized v3.2"
   branch "Hotfix 3.2"
   commit id: "Initial"
+  commit id: "Bug fix"
   checkout main
   commit id: "Feature 3"
-  checkout "Hotfix 3.2"
-  commit id: "Bug fix"
   checkout main
   commit id: "v3.3" tag: "Smartstore v3.3" type:HIGHLIGHT
   commit id: "Finalized v3.3"
