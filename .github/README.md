@@ -29,7 +29,7 @@ Each branch reflects the source code compatible with the Smartstore version, e.g
 This means that a new (hotfix) branch is created with each new release.
 By doing this, we can quickly access the source code of the module for a specific version and fix critical issues without affecting the ongoing development.
 
-## Code Documentation
+## Documentation
 
 > With great code comes great documentability. :spider:
 
